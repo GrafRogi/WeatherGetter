@@ -1,0 +1,8 @@
+To send sms via this service, send JSON with phone number and message.
+
+Method: POST,
+URI: /message,
+JSON: {
+          "phoneNumber" : "+79991234567",
+          "message" : "Hello"
+      }
