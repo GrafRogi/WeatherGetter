@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.*;
 public class PhoneController {
 
     private final String phoneNumber;
+
     private final CityService cityService;
 
     public PhoneController(String phoneNumber, CityService cityService) {
@@ -14,10 +15,9 @@ public class PhoneController {
     }
 
 
-    @GetMapping("/phonenumber")
-    public String getPhoneNumber() {
-        return servicecity.findCityByPhoneNumber(phoneNumber);
-    }
+    @GetMapping("/phonenumber{phoneNumber}")
+   void getPhoneNumber(@PathVariable String phoneNumber) {
+        }
 }
 
 
