@@ -14,6 +14,7 @@ public class AppController {
 
     @GetMapping("/send/{phoneNumber}")
     public void getPhoneNumber(@PathVariable String phoneNumber) {
+        System.out.println("Controller invoke sender.send() with "+phoneNumber);
         sender.send(phoneNumber);
         log.info("Controller invoke sender.send() with "+phoneNumber);
     }

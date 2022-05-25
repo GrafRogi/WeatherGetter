@@ -13,8 +13,9 @@ import org.springframework.stereotype.Component;
 @Slf4j
 public class RabbitReceiver {
 
-    @RabbitListener(queues = "one")
+    @RabbitListener(containerFactory = "myRabbitListenerContainerFactory",queues = "myqueue")
     public void receive(String message) {
+        System.out.println("Message " + message + " was receive");
         log.info("Message " + message + " was receive");
     }
 }

@@ -17,7 +17,8 @@ public class RabbitSender {
     private RabbitTemplate template;
 
     public void send(String message) {
-        template.convertAndSend(message);
+        template.convertAndSend("myqueue",message);
+        System.out.println("Message " + message + " send");
         log.info("Message " + message + " send");
     }
 }
