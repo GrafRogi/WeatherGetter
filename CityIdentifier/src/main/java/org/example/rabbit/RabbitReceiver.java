@@ -20,22 +20,14 @@ import java.io.IOException;
 public class RabbitReceiver {
 
     @Autowired
-    RabbitSender sender;
-    @Autowired
     ObjectMapper objectMapper;
 
-    @RabbitListener(containerFactory = "myRabbitListenerContainerFactory", queues = "cityIdentifierOutQueue")
-    public void receiveFromCityIdentifier(Message message) {
-        System.out.println("Message " + message + " was received");
-        log.debug("Message " + message + " was received");
-        sender.sendToWeatherReporter(message);
-    }
-
-    @RabbitListener(containerFactory = "myRabbitListenerContainerFactory", queues = "weatherReporterOutQueue")
-    public void receiveFromWeatherReporter(Message message) {
-        System.out.println("Message " + message + " was received");
-        log.info("Message " + message + " was received");
-        sender.sendToMessageSender(message);
+    @RabbitListener(containerFactory = "myRabbitListenerContainerFactory",queues = "cityIdentifierInQueue")
+    public void receive(Message message) {
+        MessageDTO messageDTO = convertToDTO(message);
+        System.out.println("Message " + messageDTO + " was received");
+        log.info("Message " + messageDTO + " was received");
+        //Вот тут надо вызвать метод бизнес-логики
     }
 
     private MessageDTO convertToDTO(Message message) {

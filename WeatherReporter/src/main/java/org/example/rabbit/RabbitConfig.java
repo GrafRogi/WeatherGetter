@@ -15,7 +15,6 @@ import org.springframework.context.annotation.Configuration;
  */
 @Configuration
 @EnableRabbit
-
 public class RabbitConfig {
 
     @Bean
@@ -23,41 +22,20 @@ public class RabbitConfig {
         return new CachingConnectionFactory("localhost");
     }
 
-    @Bean
-    public AmqpAdmin amqpAdmin() {
-        return new RabbitAdmin(connectionFactory());
-    }
+//    @Bean
+//    public AmqpAdmin amqpAdmin() {
+//        return new RabbitAdmin(connectionFactory());
+//    }
 
     @Bean
     public RabbitTemplate rabbitTemplate() {
         return new RabbitTemplate(connectionFactory());
     }
 
-    @Bean
-    public Queue cityIdentifierInQueue() {
-        return new Queue("cityIdentifierInQueue");
-    }
-
-    @Bean
-    public Queue cityIdentifierOutQueue() {
-        return new Queue("cityIdentifierOutQueue");
-    }
-
-    @Bean
-    public Queue weatherReporterInQueue() {
-        return new Queue("weatherReporterInQueue");
-    }
-
-    @Bean
-    public Queue weatherReporterOutQueue() {
-        return new Queue("weatherReporterOutQueue");
-    }
-
-    @Bean
-    public Queue messageSenderInQueue() {
-        return new Queue("messageSenderInQueue");
-    }
-
+//    @Bean
+//    public Queue myQueue() {
+//        return new Queue("myqueue");
+//    }
     @Bean
     public SimpleRabbitListenerContainerFactory myRabbitListenerContainerFactory() {
         SimpleRabbitListenerContainerFactory factory = new SimpleRabbitListenerContainerFactory();

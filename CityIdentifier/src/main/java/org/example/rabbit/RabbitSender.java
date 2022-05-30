@@ -9,7 +9,6 @@ import org.springframework.amqp.core.MessageBuilder;
 import org.springframework.amqp.core.MessageProperties;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Component;
 
 /**
@@ -24,23 +23,10 @@ public class RabbitSender {
     @Autowired
     ObjectMapper objectMapper;
 
-    public void sendToCityIdentifier(String message) {
-        MessageDTO messageDTO = new MessageDTO(message);
-        template.send("cityIdentifierInQueue", mapToRabbitMessage(messageDTO));
-        System.out.println("In sendToCityIdentifier() message " + messageDTO + " send");
-        log.info("In sendToCityIdentifier() message " + messageDTO + " send");
-    }
-
-    public void sendToWeatherReporter(Message message) {
-        template.send("weatherReporterInQueue", message);
+    public void send(MessageDTO message) {
+        template.send("cityIdentifierOutQueue", mapToRabbitMessage(message));
         System.out.println("Message " + message + " send");
-        log.info("In sendToWeatherReporter() message " + message + " send");
-    }
-
-    public void sendToMessageSender(Message message)  {
-        template.send("messageSenderInQueue",message);
-        System.out.println("Message " + message + " send");
-        log.info("In sendToMessageSender() message " + message + " send");
+        log.info("Message " + message + " send");
     }
 
     private Message mapToRabbitMessage(MessageDTO messageDTO) {

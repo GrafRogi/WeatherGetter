@@ -1,1 +1,14 @@
-GET http://localhost:8080/send/{124}
+GET yandex.ru
+
+###
+
+POST http://localhost:8080/send/142215
+Content-Type: application/json
+
+{
+  "name": "1",
+  "sex": "2"
+}
+
+###
+GET https://api.openweathermap.org/data/2.5/weather?q=Moscow&appid=2d994807cab84e7a791bddf1f7c7fcc0

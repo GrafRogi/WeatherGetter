@@ -20,22 +20,13 @@ import java.io.IOException;
 public class RabbitReceiver {
 
     @Autowired
-    RabbitSender sender;
-    @Autowired
     ObjectMapper objectMapper;
 
-    @RabbitListener(containerFactory = "myRabbitListenerContainerFactory", queues = "cityIdentifierOutQueue")
-    public void receiveFromCityIdentifier(Message message) {
-        System.out.println("Message " + message + " was received");
-        log.debug("Message " + message + " was received");
-        sender.sendToWeatherReporter(message);
-    }
-
-    @RabbitListener(containerFactory = "myRabbitListenerContainerFactory", queues = "weatherReporterOutQueue")
-    public void receiveFromWeatherReporter(Message message) {
+    @RabbitListener(containerFactory = "myRabbitListenerContainerFactory", queues = "weatherReporterInQueue")
+    public void receive(Message message) {
         System.out.println("Message " + message + " was received");
         log.info("Message " + message + " was received");
-        sender.sendToMessageSender(message);
+        // Тут вызвать бизнес-логику
     }
 
     private MessageDTO convertToDTO(Message message) {
@@ -46,5 +37,4 @@ public class RabbitReceiver {
         }
         return null;
     }
-
 }
