@@ -12,6 +12,4 @@ public class MessageDTO {
     private final String phoneNumber;
     private String city;
     private String message;
-
-
 }

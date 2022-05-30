@@ -2,6 +2,7 @@ package org.example.rabbit;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
+import org.example.WeatherReporter;
 import org.example.dto.MessageDTO;
 import org.springframework.amqp.core.Message;
 import org.springframework.amqp.rabbit.annotation.EnableRabbit;
@@ -21,12 +22,14 @@ public class RabbitReceiver {
 
     @Autowired
     ObjectMapper objectMapper;
+    @Autowired
+    WeatherReporter reporter;
 
     @RabbitListener(containerFactory = "myRabbitListenerContainerFactory", queues = "weatherReporterInQueue")
     public void receive(Message message) {
         System.out.println("Message " + message + " was received");
         log.info("Message " + message + " was received");
-        // Тут вызвать бизнес-логику
+        reporter.getContent(convertToDTO(message));
     }
 
     private MessageDTO convertToDTO(Message message) {

@@ -21,7 +21,7 @@ public class RabbitSender {
     @Autowired
     private RabbitTemplate template;
     @Autowired
-    ObjectMapper objectMapper;
+    private ObjectMapper objectMapper;
 
     public void send(MessageDTO message) {
         template.send("cityIdentifierOutQueue", mapToRabbitMessage(message));

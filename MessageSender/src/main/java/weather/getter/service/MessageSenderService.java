@@ -14,8 +14,10 @@ import weather.getter.dto.MessageDTO;
 @Service
 public class MessageSenderService {
 
-    @Value("${value}") private String login;
-    @Value("${value}") private String password;
+    @Value("${value}")
+    private String login;
+    @Value("${value}")
+    private String password;
 
     public void send(MessageDTO messageDTO) {
         new RestTemplate().exchange(createUri(messageDTO), HttpMethod.GET,
