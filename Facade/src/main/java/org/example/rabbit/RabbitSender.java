@@ -22,7 +22,7 @@ public class RabbitSender {
     @Autowired
     private RabbitTemplate template;
     @Autowired
-    ObjectMapper objectMapper;
+    private ObjectMapper objectMapper;
 
     public void sendToCityIdentifier(String message) {
         MessageDTO messageDTO = new MessageDTO(message);

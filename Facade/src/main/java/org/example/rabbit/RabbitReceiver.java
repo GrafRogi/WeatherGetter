@@ -20,9 +20,9 @@ import java.io.IOException;
 public class RabbitReceiver {
 
     @Autowired
-    RabbitSender sender;
+    private RabbitSender sender;
     @Autowired
-    ObjectMapper objectMapper;
+    private ObjectMapper objectMapper;
 
     @RabbitListener(containerFactory = "myRabbitListenerContainerFactory", queues = "cityIdentifierOutQueue")
     public void receiveFromCityIdentifier(Message message) {
