@@ -9,7 +9,6 @@ import org.springframework.amqp.core.MessageBuilder;
 import org.springframework.amqp.core.MessageProperties;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Component;
 
 /**
@@ -25,8 +24,9 @@ public class RabbitSender {
     private ObjectMapper objectMapper;
 
     public void sendToCityIdentifier(String message) {
-        MessageDTO messageDTO = new MessageDTO(message);
-        template.send("cityIdentifierInQueue", mapToRabbitMessage(messageDTO));
+        MessageDTO messageDTO = new MessageDTO();
+        messageDTO.setPhoneNumber(message);
+        template.convertAndSend("cityIdentifierInQueue",mapToRabbitMessage(messageDTO));
         System.out.println("In sendToCityIdentifier() message " + messageDTO + " send");
         log.info("In sendToCityIdentifier() message " + messageDTO + " send");
     }

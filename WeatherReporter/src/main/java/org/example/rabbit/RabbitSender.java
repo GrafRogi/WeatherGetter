@@ -11,6 +11,7 @@ import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+
 /**
  * @author Artyom Kulagin
  */
@@ -38,6 +39,7 @@ public class RabbitSender {
         }
         return MessageBuilder
                 .withBody(stringMessage.getBytes())
+                .setContentEncoding("UTF-8")
                 .setContentType(MessageProperties.CONTENT_TYPE_JSON)
                 .build();
     }

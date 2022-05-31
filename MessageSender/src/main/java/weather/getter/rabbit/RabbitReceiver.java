@@ -35,7 +35,8 @@ public class RabbitReceiver {
 
     private MessageDTO convertToDTO(Message message) {
         try {
-            return objectMapper.readValue(message.getBody(), MessageDTO.class);
+            String s = new String(message.getBody());
+            return objectMapper.readValue(s, MessageDTO.class);
         } catch (IOException e) {
             e.printStackTrace();
         }
