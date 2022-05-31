@@ -22,10 +22,10 @@ public class RabbitConfig {
         return new CachingConnectionFactory("localhost");
     }
 
-//    @Bean
-//    public AmqpAdmin amqpAdmin() {
-//        return new RabbitAdmin(connectionFactory());
-//    }
+    @Bean
+    public AmqpAdmin amqpAdmin() {
+        return new RabbitAdmin(connectionFactory());
+    }
 
     @Bean
     public RabbitTemplate rabbitTemplate() {

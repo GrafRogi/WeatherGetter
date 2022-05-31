@@ -1,5 +1,7 @@
 package org.example.rabbit;
 
+import com.fasterxml.jackson.core.type.TypeReference;
+import org.example.cityIdentifierService.Service;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.example.dto.MessageDTO;
@@ -15,10 +17,12 @@ import java.io.IOException;
  * @author Artyom Kulagin
  */
 @Component
-@EnableRabbit
 @Slf4j
+@EnableRabbit
 public class RabbitReceiver {
 
+    @Autowired
+    Service service;
     @Autowired
     private ObjectMapper objectMapper;
 
@@ -27,12 +31,15 @@ public class RabbitReceiver {
         MessageDTO messageDTO = convertToDTO(message);
         System.out.println("Message " + messageDTO + " was received");
         log.info("Message " + messageDTO + " was received");
-        //Вот тут надо вызвать метод бизнес-логики
+        service.send(messageDTO);
     }
 
     private MessageDTO convertToDTO(Message message) {
         try {
-            return objectMapper.readValue(message.getBody(), MessageDTO.class);
+            byte[] bytes = message.getBody();
+            String json = new String(bytes);
+            return objectMapper.readValue(json, new TypeReference<MessageDTO>() {
+            });
         } catch (IOException e) {
             e.printStackTrace();
         }

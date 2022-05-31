@@ -2,7 +2,7 @@ package org.example.rabbit;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
-import org.example.WeatherReporter;
+import org.example.Servise.WeatherReporter;
 import org.example.dto.MessageDTO;
 import org.springframework.amqp.core.Message;
 import org.springframework.amqp.rabbit.annotation.EnableRabbit;

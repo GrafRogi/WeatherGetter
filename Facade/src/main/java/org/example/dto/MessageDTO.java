@@ -4,13 +4,14 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 
+import java.io.Serializable;
+
 /**
  * @author Artyom Kulagin
  */
 @Data
-@RequiredArgsConstructor
-public class MessageDTO {
-    private final String phoneNumber;
+public class MessageDTO implements Serializable {
+    private String phoneNumber;
     private String city;
     private String message;
 }

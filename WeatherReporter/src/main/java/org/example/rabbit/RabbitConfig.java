@@ -1,6 +1,6 @@
 package org.example.rabbit;
 
-import org.springframework.amqp.core.*;
+import org.springframework.amqp.core.AmqpAdmin;
 import org.springframework.amqp.rabbit.annotation.EnableRabbit;
 import org.springframework.amqp.rabbit.config.SimpleRabbitListenerContainerFactory;
 import org.springframework.amqp.rabbit.connection.CachingConnectionFactory;
@@ -22,20 +22,16 @@ public class RabbitConfig {
         return new CachingConnectionFactory("localhost");
     }
 
-//    @Bean
-//    public AmqpAdmin amqpAdmin() {
-//        return new RabbitAdmin(connectionFactory());
-//    }
+    @Bean
+    public AmqpAdmin amqpAdmin() {
+        return new RabbitAdmin(connectionFactory());
+    }
 
     @Bean
     public RabbitTemplate rabbitTemplate() {
         return new RabbitTemplate(connectionFactory());
     }
 
-//    @Bean
-//    public Queue myQueue() {
-//        return new Queue("myqueue");
-//    }
     @Bean
     public SimpleRabbitListenerContainerFactory myRabbitListenerContainerFactory() {
         SimpleRabbitListenerContainerFactory factory = new SimpleRabbitListenerContainerFactory();
