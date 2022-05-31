@@ -9,6 +9,6 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 @EnableWebMvc
 @PropertySource("classpath:application.properties")
 @ComponentScan("city.getter")
-public class CityIdentifierConfig {
+public class Config {
 
 }
