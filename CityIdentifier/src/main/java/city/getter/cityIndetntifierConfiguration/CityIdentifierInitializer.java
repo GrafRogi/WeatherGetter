@@ -12,7 +12,7 @@ public class CityIdentifierInitializer implements WebApplicationInitializer {
     @Override
     public void onStartup(ServletContext servletContext) {
         AnnotationConfigWebApplicationContext context = new AnnotationConfigWebApplicationContext();
-        context.register(CityIdentifierConfig.class);
+        context.register(Config.class);
 
         DispatcherServlet dispatcherServlet = new DispatcherServlet(context);
         dispatcherServlet.setThrowExceptionIfNoHandlerFound(true);
